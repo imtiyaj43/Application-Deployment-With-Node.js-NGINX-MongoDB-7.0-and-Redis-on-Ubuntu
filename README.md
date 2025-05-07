@@ -69,3 +69,34 @@ npm run dev
 ```
 http://<your-public-ip>:3000/v1/status → should return OK
 ```
+### 7. Setup NGINX Reverse Proxy
+Edit config:
+```
+sudo vi /etc/nginx/sites-available/default
+Replace location block with:
+```
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    server_name _;
+
+    location / {
+        proxy_pass http://54.210.180.117:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+```
+Restart NGINX:
+```
+sudo systemctl restart nginx
+
+```
+Now you can access:
+```
+http://<your-public-ip>/v1 → Welcome to my Node.js App!
