@@ -73,6 +73,7 @@ http://<your-public-ip>:3000/v1/status → should return OK
 Edit config:
 ```
 sudo vi /etc/nginx/sites-available/default
+```
 Replace location block with:
 ```
 server {
@@ -90,7 +91,6 @@ server {
         proxy_cache_bypass $http_upgrade;
     }
 }
-
 ```
 Restart NGINX:
 ```
@@ -100,3 +100,4 @@ sudo systemctl restart nginx
 Now you can access:
 ```
 http://<your-public-ip>/v1 → Welcome to my Node.js App!
+```
