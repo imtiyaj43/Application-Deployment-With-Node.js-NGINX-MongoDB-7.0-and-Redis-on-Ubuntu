@@ -95,7 +95,6 @@ server {
 Restart NGINX:
 ```
 sudo systemctl restart nginx
-
 ```
 Now you can access:
 ```
